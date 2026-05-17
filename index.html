@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Migschitz Fingernagel | Installateur Salzburg</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Maximum palette: 6 colours total */
+            --color-bg: #FAFAFA;
+            --color-surface: #F0F2F5;
+            --color-text: #1A1D20;
+            --color-text-muted: #5C636A;
+            --color-accent: #1032CF;
+            --color-accent-light: #FFD700;
+            
+            /* Typography */
+            --font-heading: 'Oswald', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+            --text-sm: clamp(0.875rem, 1.8vw, 1rem);
+            --text-base: clamp(1rem, 2vw, 1.125rem);
+            --text-lg: clamp(1.125rem, 2.5vw, 1.375rem);
+            --text-xl: clamp(1.375rem, 3vw, 1.75rem);
+            --text-2xl: clamp(1.75rem, 4vw, 2.5rem);
+            --text-3xl: clamp(2.25rem, 5vw, 3.5rem);
+            --text-4xl: clamp(3rem, 7vw, 5rem);
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-24: 6rem;
+            
+            --section-padding: clamp(4rem, 10vw, 8rem);
+            --container-padding: clamp(1rem, 5vw, 2rem);
+            
+            /* Z-Index Stack */
+            --z-base: 0;
+            --z-raised: 10;
+            --z-dropdown: 100;
+            --z-sticky: 200;
+            --z-overlay: 500;
+            --z-modal: 1000;
+            --z-toast: 2000;
+            --z-max: 9000;
+        }
+
+        /* Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            color: var(--color-text);
+        }
+
+        h1 { font-size: var(--text-4xl); }
+        h2 { font-size: var(--text-3xl); }
+        h3 { font-size: var(--text-2xl); }
+        h4 { font-size: var(--text-xl); }
+
+        p { margin-bottom: var(--space-4); }
+        p:last-child { margin-bottom: 0; }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Icons & Alignment */
+        [data-lucide] {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+            line-height: 1;
+            pointer-events: none;
+            width: 1.25em;
+            height: 1.25em;
+        }
+
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45em;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--container-padding);
+        }
+
+        section {
+            padding: var(--section-padding) 0;
+        }
+
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            padding: 8px;
+            z-index: var(--z-max);
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+        
+        :focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        /* Buttons */
+        .btn {
+            font-family: var(--font-heading);
+            font-size: var(--text-base);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            z-index: var(--z-raised);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            justify-content: center;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+        }
+        .btn-primary:hover {
+            filter: brightness(0.85);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-text);
+            border: 2px solid var(--color-text);
+        }
+        .btn-outline:hover {
+            background-color: var(--color-text);
+            color: var(--color-bg);
+        }
+
+        /* Header & Navigation */
+        .site-header {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0;
+            z-index: 1001;
+            background-color: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .utility-bar {
+            background-color: var(--color-text);
+            color: var(--color-surface);
+            font-size: var(--text-xs);
+            padding: var(--space-2) 0;
+            display: none;
+        }
+        @media (min-width: 769px) {
+            .utility-bar { display: block; }
+        }
+        .utility-inner {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-6);
+        }
+        .utility-link:hover { color: var(--color-accent-light); }
+
+        .header-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 5rem;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            color: var(--color-accent);
+            position: relative;
+            z-index: var(--z-raised);
+            display: inline-block;
+        }
+        .logo span {
+            color: var(--color-text);
+        }
+
+        /* Desktop Nav */
+        .desktop-nav {
+            display: none;
+            align-items: center;
+            gap: var(--space-8);
+        }
+        @media (min-width: 769px) {
+            .desktop-nav { display: flex; }
+        }
+        .nav-link {
+            font-family: var(--font-heading);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text);
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-accent);
+            transition: width 0.2s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Mobile Nav Toggle */
+        .nav-toggle {
+            position: absolute; 
+            right: 1.25rem; 
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1002;
+            background: transparent; 
+            border: none; 
+            cursor: pointer; 
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 40px;
+            height: 28px;
+        }
+        @media (min-width: 769px) {
+            .nav-toggle { display: none; pointer-events: none; }
+        }
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-text);
+            margin: 0 auto;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+            transform: translateY(11px) rotate(45deg);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+            transform: translateY(-11px) rotate(-45deg);
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            position: fixed; 
+            inset: 0;
+            z-index: 1000;
+            background-color: var(--color-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-overlay.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .mobile-nav-list {
+            list-style: none;
+            text-align: center;
+        }
+        .mobile-nav-link {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 1rem 0;
+            color: var(--color-text);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: calc(5rem + 36px + var(--space-12));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1.2fr 1fr;
+                gap: var(--space-16);
+            }
+        }
+        .hero-content {
+            max-width: 600px;
+        }
+        .hero-badge {
+            font-family: var(--font-heading);
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-accent);
+            margin-bottom: var(--space-6);
+            font-weight: 700;
+        }
+        .hero-badge::before {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-accent-light);
+        }
+        .hero h1 {
+            margin-bottom: var(--space-6);
+        }
+        .hero-lead {
+            font-size: var(--text-lg);
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-8);
+            max-width: 500px;
+        }
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-4);
+        }
+        
+        /* Hero Image - Break grid rule for visual interest */
+        .hero-visual {
+            position: relative;
+            height: 50vh;
+            min-height: 400px;
+            width: 100%;
+        }
+        @media (min-width: 1024px) {
+            .hero-visual {
+                height: 80vh;
+                margin-right: calc(var(--container-padding) * -1);
+            }
+        }
+        .hero-img-wrapper {
+            position: absolute;
+            inset: 0;
+            background-color: var(--color-surface);
+        }
+        .hero-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .hero-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--color-bg) 0%, transparent 20%);
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            padding: var(--space-4) 0;
+            text-align: center;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: var(--text-sm);
+        }
+
+        /* Services Section */
+        .services-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto var(--space-16);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-6);
+        }
+        @media (min-width: 640px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .service-card {
+            background-color: var(--color-surface);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+        .service-img-wrap {
+            width: 100%;
+            height: 240px;
+            background-color: var(--color-text);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .service-card:hover .service-img-wrap img {
+            transform: scale(1.05);
+        }
+        .service-img-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e2e5e9 0%, #cfd4db 100%);
+            color: var(--color-text-muted);
+        }
+        .service-img-fallback [data-lucide] {
+            width: 48px;
+            height: 48px;
+            opacity: 0.3;
+        }
+
+        .service-content {
+            padding: 1.5rem 1.5rem 2rem 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .service-content h3 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-2);
+        }
+        .service-content p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            margin-bottom: 0;
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--color-surface);
+            position: relative;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+        @media (min-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .about-text h2 {
+            margin-bottom: var(--space-6);
+        }
+        .about-text p {
+            color: var(--color-text-muted);
+            font-size: var(--text-lg);
+        }
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+            margin-top: var(--space-8);
+            padding-top: var(--space-8);
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+        .stat-item h4 {
+            font-size: var(--text-3xl);
+            color: var(--color-accent);
+            margin-bottom: var(--space-1);
+        }
+        .stat-item span {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: var(--text-sm);
+            letter-spacing: 0.05em;
+        }
+        .about-visual {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-4);
+            margin-top: var(--space-6);
+        }
+        .about-img-wrap {
+            height: 300px;
+            background-color: var(--color-bg);
+        }
+        .about-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (min-width: 640px) {
+            .about-visual {
+                grid-template-columns: repeat(2, 1fr);
+                margin-top: 0;
+            }
+            .about-img-wrap:nth-child(2) {
+                transform: translateY(40px);
+            }
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-text);
+            color: var(--color-surface);
+            padding: clamp(4rem, 8vw, 7rem) 0 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-12);
+            margin-bottom: var(--space-12);
+        }
+        @media (min-width: 768px) {
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+        }
+        
+        .footer-brand .logo {
+            color: var(--color-accent-light);
+            margin-bottom: var(--space-4);
+        }
+        .footer-brand .logo span {
+            color: var(--color-bg);
+        }
+        .footer-brand p {
+            color: var(--color-surface);
+            max-width: 300px;
+            margin-bottom: var(--space-6);
+        }
+        .social-links {
+            display: flex;
+            gap: var(--space-4);
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            color: var(--color-bg);
+            position: relative;
+            z-index: var(--z-raised);
+        }
+        .social-link:hover {
+            background-color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .footer-heading {
+            font-family: var(--font-heading);
+            color: var(--color-bg);
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-6);
+        }
+        .footer-list {
+            list-style: none;
+        }
+        .footer-list li {
+            margin-bottom: var(--space-3);
+        }
+        .footer-list a, .footer-list button {
+            color: var(--color-surface);
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            position: relative;
+            z-index: var(--z-raised);
+        }
+        .footer-list a:hover, .footer-list button:hover {
+            color: var(--color-bg);
+        }
+        
+        .footer-contact li {
+            color: var(--color-surface);
+            margin-bottom: var(--space-4);
+        }
+        .footer-contact [data-lucide] {
+            color: var(--color-accent-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: var(--space-6);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            text-align: center;
+            font-size: var(--text-sm);
+            color: var(--color-surface);
+        }
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: var(--z-max);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: var(--container-padding);
+        }
+        .modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-card {
+            background-color: var(--color-bg);
+            width: 100%;
+            max-width: 480px;
+            padding: 2.5rem;
+            border-radius: 4px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.is-active .modal-card {
+            transform: translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            padding: 0.5rem;
+            position: relative;
+            z-index: var(--z-raised);
+        }
+        .modal-close:hover {
+            color: var(--color-accent);
+        }
+        .modal-title {
+            margin-bottom: var(--space-4);
+            font-size: var(--text-2xl);
+            color: var(--color-text);
+        }
+        .modal-body {
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-6);
+        }
+        .modal-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            margin-top: var(--space-4);
+        }
+        .modal-links a {
+            color: var(--color-accent);
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--color-bg);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            padding: var(--space-6) var(--container-padding);
+            z-index: var(--z-toast);
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+        .cookie-banner.is-visible {
+            transform: translateY(0);
+        }
+        @media (min-width: 768px) {
+            .cookie-banner {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        .cookie-text {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            max-width: 800px;
+        }
+        .cookie-actions {
+            display: flex;
+            gap: var(--space-4);
+            flex-shrink: 0;
+        }
+        .btn-cookie-accept {
+            background-color: var(--color-accent);
+            color: var(--color-bg);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: var(--text-sm);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            z-index: var(--z-raised);
+        }
+        .btn-cookie-decline {
+            background-color: var(--color-surface);
+            color: var(--color-text);
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: var(--text-sm);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            z-index: var(--z-raised);
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+    </style>
+</head>
+<body>
+<!-- DEMO NOTICE BANNER - benedictjaros.com -->
+<style>
+#__demo_spacer{display:block;}
+#__demo_notice,#__demo_notice *{box-sizing:border-box;margin:0;padding:0;}
+#__demo_notice{
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(9,9,11,.97);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+#__demo_inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 44px 0 18px;min-height:38px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+#__demo_dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#f5c842;box-shadow:0 0 7px rgba(245,200,66,.55);}
+#__demo_label{color:#f5c842;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;}
+#__demo_divider{color:rgba(255,255,255,.15);font-size:12px;flex-shrink:0;}
+#__demo_text{color:rgba(255,255,255,.45);font-size:11.5px;line-height:1.45;flex:1 1 160px;}
+#__demo_links{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+#__demo_links a{
+  color:rgba(255,255,255,.38);font-size:11px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+#__demo_links a:hover{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.4);}
+#__demo_link_sep{color:rgba(255,255,255,.15);font-size:10px;}
+#__demo_close{
+  position:absolute;right:0;top:0;bottom:0;width:40px;
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.28);font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+#__demo_close:hover{color:rgba(255,255,255,.7);}
+@media(max-width:560px){
+  #__demo_inner{padding:7px 44px 7px 14px;gap:6px;}
+  #__demo_text{font-size:11px;flex:1 1 100%;order:3;}
+  #__demo_dot,#__demo_label{order:1;}
+  #__demo_divider{order:2;}
+  #__demo_links{order:4;}
+}
+</style>
+<div id="__demo_spacer"></div>
+<div id="__demo_notice" role="banner" aria-label="Demo notice">
+  <div id="__demo_inner">
+    <span id="__demo_dot"></span>
+    <span id="__demo_label">Demo</span>
+    <span id="__demo_divider">/</span>
+    <span id="__demo_text">Unofficial remake &mdash; not the real website. All content &amp; trademarks belong to their owners.</span>
+    <div id="__demo_links">
+      <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener noreferrer">Impressum</a>
+      <span id="__demo_link_sep">&middot;</span>
+      <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+    </div>
+  </div>
+  <button id="__demo_close" aria-label="Close demo notice">&#x2715;</button>
+</div>
+<script>
+(function () {
+  var spacer = document.getElementById('__demo_spacer');
+  var b = document.getElementById('__demo_notice');
+  var x = document.getElementById('__demo_close');
+  if (!b || !spacer) return;
+  function sync() { spacer.style.height = b.offsetHeight + 'px'; }
+  function hide() {
+    b.style.display = 'none'; spacer.style.height = '0';
+    try { sessionStorage.setItem('__demo_closed', '1'); } catch (e) {}
+  }
+  try { if (sessionStorage.getItem('__demo_closed')) { b.style.display = 'none'; spacer.style.height = '0'; return; } } catch (e) {}
+  sync();
+  window.addEventListener('resize', function () { if (b.style.display !== 'none') sync(); });
+  if (x) x.addEventListener('click', hide);
+}());
+</script>
+
+
+    <a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <!-- Header -->
+    <header class="site-header" id="header">
+        <!-- Utility Bar -->
+        <div class="utility-bar">
+            <div class="container utility-inner">
+                <a href="tel:+436608639766" class="utility-link icon-text">
+                    <i data-lucide="phone" style="width: 14px; height: 14px;"></i>
+                    <span>+43 (0) 660 / 8639766</span>
+                </a>
+                <a href="mailto:office@migschitz-fingernagel.at" class="utility-link icon-text">
+                    <i data-lucide="mail" style="width: 14px; height: 14px;"></i>
+                    <span>office@migschitz-fingernagel.at</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="container header-inner">
+            <a href="#" class="logo">Migschitz <span>Fingernagel</span></a>
+            
+            <nav class="desktop-nav" aria-label="Hauptnavigation">
+                <a href="#leistungen" class="nav-link">Leistungen</a>
+                <a href="#ueber-uns" class="nav-link">Über uns</a>
+                <button type="button" class="btn btn-primary trigger-contact icon-text">
+                    <i data-lucide="phone"></i> <span>Jetzt anrufen</span>
+                </button>
+            </nav>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen" aria-controls="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobile-menu" aria-hidden="true">
+        <nav aria-label="Mobile Navigation">
+            <ul class="mobile-nav-list">
+                <li><a href="#leistungen" class="mobile-nav-link">Leistungen</a></li>
+                <li><a href="#ueber-uns" class="mobile-nav-link">Über uns</a></li>
+                <li><button type="button" class="mobile-nav-link trigger-contact" style="background:none;border:none;width:100%;cursor:pointer;">Kontakt</button></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge icon-text">Familienbetrieb seit 1981</div>
+                    <h1>Ihr Experte für Gas, Wasser und Heizung</h1>
+                    <p class="hero-lead">Seit 40 Jahren der regionale Ansprechpartner in Salzburg und Umgebung. Innovative Komplettlösungen, energieeffiziente Heizungen und Rundum-Service aus Meisterhand.</p>
+                    <div class="hero-actions">
+                        <a href="tel:+436608639766" class="btn btn-primary icon-text">
+                            <i data-lucide="phone"></i> <span>Jetzt anrufen</span>
+                        </a>
+                        <button type="button" class="btn btn-outline trigger-contact">
+                            Jetzt kontaktieren
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-img-wrapper">
+                        <img src="https://www.migschitz-fingernagel.at/files/slider/modern-minimalist-bathroom-gd44ab473a_1280.jpg" alt="Modernes, minimalistisches Badezimmer" fetchpriority="high">
+                        <div class="hero-img-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Bar -->
+        <div class="trust-bar">
+            <div class="container">
+                Familienbetrieb seit 1981 – Ihr Installateur in Salzburg
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section id="leistungen" class="services-section">
+            <div class="container">
+                <div class="services-header reveal">
+                    <h2>Unsere Leistungen</h2>
+                    <p>Umfassende Haustechnik-Lösungen für kleine Reparaturen und große Projekte. Professionell, zuverlässig und termingerecht.</p>
+                </div>
+
+                <div class="services-grid">
+                    <article class="service-card reveal" style="--i:0">
+                        <div class="service-img-wrap">
+                            <img src="https://www.migschitz-fingernagel.at/assets/images/6/Titelbild%20B%C3%A4dumbau-721706ef.jpg" alt="Bäderumbau Installation" loading="lazy">
+                        </div>
+                        <div class="service-content">
+                            <h3>Bäderumbau</h3>
+                            <p>Von der Planung bis zur Umsetzung – wir verwandeln Ihr altes Bad in eine moderne Wohlfühloase.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:1">
+                        <div class="service-img-wrap">
+                            <img src="https://www.migschitz-fingernagel.at/assets/images/7/Titelbild%20Leckortung-c04abc76.jpg" alt="Leckortung Technik" loading="lazy">
+                        </div>
+                        <div class="service-content">
+                            <h3>Leckortung</h3>
+                            <p>Präzise und zerstörungsfreie Ortung von Wasserschäden mittels modernster Thermografie.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:2">
+                        <div class="service-img-wrap">
+                            <img src="https://www.migschitz-fingernagel.at/assets/images/0/Titelbild-Reparaturen-dc3c6c5c.jpg" alt="Sanitär Reparaturen" loading="lazy">
+                        </div>
+                        <div class="service-content">
+                            <h3>Reparaturen</h3>
+                            <p>Schnelle und fachgerechte Behebung von Gebrechen an Ihren Sanitär- und Heizungsanlagen.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:3">
+                        <div class="service-img-wrap">
+                            <img src="https://www.migschitz-fingernagel.at/assets/images/1/Titelbild%20Verstopfungen-13fff059.jpg" alt="Rohr Verstopfungen beheben" loading="lazy">
+                        </div>
+                        <div class="service-content">
+                            <h3>Verstopfungen</h3>
+                            <p>Professionelle Rohrreinigung zur raschen Beseitigung von akuten Abflussverstopfungen.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:4">
+                        <div class="service-img-wrap">
+                            <img src="https://www.migschitz-fingernagel.at/assets/images/9/Titelbild%20Gasthermen-8ac24213.jpg" alt="Gasthermen Wartung" loading="lazy">
+                        </div>
+                        <div class="service-content">
+                            <h3>Gasthermen & Kesseltausch</h3>
+                            <p>Effiziente Modernisierung Ihrer Heizungsanlage für mehr Leistung und geringere Kosten.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:5">
+                        <div class="service-img-wrap">
+                            <img src="https://www.migschitz-fingernagel.at/assets/images/0/Titelbild%20Biomasse-1d19c7f6.jpg" alt="Biomasse Heizung" loading="lazy">
+                        </div>
+                        <div class="service-content">
+                            <h3>Biomasse</h3>
+                            <p>Umweltschonende und zukunftssichere Heizlösungen mit Pellets, Hackgut oder Stückholz.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:6">
+                        <div class="service-img-wrap">
+                            <div class="service-img-fallback">
+                                <i data-lucide="activity"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Heizwasseranalysen</h3>
+                            <p>Analyse und Optimierung Ihres Heizwassers für eine längere Lebensdauer der Anlage.</p>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" style="--i:7">
+                        <div class="service-img-wrap">
+                            <div class="service-img-fallback">
+                                <i data-lucide="droplets"></i>
+                            </div>
+                        </div>
+                        <div class="service-content">
+                            <h3>Filterwartungen</h3>
+                            <p>Regelmäßige Überprüfung und Reinigung Ihrer Wasserfilter für optimale Trinkwasserqualität.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="ueber-uns" class="about-section">
+            <div class="container about-grid">
+                <div class="about-text reveal">
+                    <h2>Willkommen bei Ihrem Installateur Fachbetrieb!</h2>
+                    <p>Als Installateur in Salzburg und Umgebung bieten wir Ihnen mit über 36-jähriger Erfahrung und höchster Fachkompetenz ein umfangreiches Leistungsspektrum rund um Ihre Haustechnik.</p>
+                    <p>Wir sind Ihr kompetenter Partner und sorgen dafür, dass aus Ihrem Zuhause eine Wohlfühloase wird. Ob kleine Reparaturen, komplexe Heizungssanierungen oder die Planung Ihres neuen Traumbads – wir stehen für Qualität aus Meisterhand.</p>
+                    
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <h4>1981</h4>
+                            <span>Gründungsjahr</span>
+                        </div>
+                        <div class="stat-item">
+                            <h4>100%</h4>
+                            <span>Meisterqualität</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual reveal" style="--i:1">
+                    <div class="about-img-wrap">
+                        <img src="https://www.migschitz-fingernagel.at/assets/images/9/Titelbild%20Gasthermen-8ac24213.jpg" alt="Installationstechnik" loading="lazy">
+                    </div>
+                    <div class="about-img-wrap">
+                        <img src="https://www.migschitz-fingernagel.at/assets/images/7/Titelbild%20Leckortung-c04abc76.jpg" alt="Präzise Technik" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="logo">Migschitz <span>Fingernagel</span></span>
+                    <p>Ihr regionaler Ansprechpartner für Gas, Wasser und Heizung in Salzburg und Umgebung. Familienbetrieb seit 1981.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4 class="footer-heading">Rechtliches</h4>
+                    <ul class="footer-list">
+                        <li><button type="button" class="trigger-legal">Impressum</button></li>
+                        <li><button type="button" class="trigger-legal">Datenschutzerklärung</button></li>
+                        <li><button type="button" class="trigger-contact">Kontakt</button></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4 class="footer-heading">Kontakt</h4>
+                    <ul class="footer-list">
+                        <li class="icon-text">
+                            <i data-lucide="map-pin"></i>
+                            <span>Installateur Migschitz - Fingernagel GmbH, Plainbergweg 30, A-5101 Bergheim</span>
+                        </li>
+                        <li class="icon-text">
+                            <i data-lucide="phone"></i>
+                            <span>+43 (0) 660 / 8639766, +43 (0) 662 / 450 512</span>
+                        </li>
+                        <li class="icon-text">
+                            <i data-lucide="mail"></i>
+                            <span>office@migschitz-fingernagel.at</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 Migschitz Fingernagel — All original content, images & trademarks are property of their respective owners. Website rebuilt by Benedict Jaros.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modal-contact" role="dialog" aria-modal="true" aria-labelledby="modal-contact-title">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen" data-close-modal>
+                <i data-lucide="x"></i>
+            </button>
+            <h2 id="modal-contact-title" class="modal-title">Kontaktanfrage</h2>
+            <p class="modal-body">This feature will be live once the website is launched and configured. Contact us in the meantime — we'd love to hear from you.</p>
+            <a href="tel:+436608639766" class="btn btn-primary icon-text" style="width:100%">
+                <i data-lucide="phone"></i> <span>+43 (0) 660 / 8639766</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-legal" role="dialog" aria-modal="true" aria-labelledby="modal-legal-title">
+        <div class="modal-card">
+            <button class="modal-close" aria-label="Schließen" data-close-modal>
+                <i data-lucide="x"></i>
+            </button>
+            <h2 id="modal-legal-title" class="modal-title">Rechtliche Hinweise</h2>
+            <p class="modal-body">Diese Website ist ein Demo-Remake und wurde nicht von oder für das Unternehmen erstellt. Die Inhalte dienen ausschließlich Demonstrationszwecken. Für unsere eigenen rechtlichen Informationen:</p>
+            <div class="modal-links">
+                <a href="https://benedictjaros.com/impressum" target="_blank">Impressum</a>
+                <a href="https://benedictjaros.com/datenschutz" target="_blank">Datenschutz</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookie Einwilligung">
+        <div class="cookie-text">
+            Wir verwenden Cookies, um Ihnen das beste Nutzererlebnis zu bieten. Einige sind essenziell, während andere uns helfen, diese Website zu verbessern.
+        </div>
+        <div class="cookie-actions">
+            <button type="button" class="btn-cookie-decline" id="cookie-decline">Nur essenzielle</button>
+            <button type="button" class="btn-cookie-accept" id="cookie-accept">Akzeptieren</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Mobile Navigation ---
+            const navToggle = document.querySelector('.nav-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            function toggleMenu() {
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                navToggle.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('is-open');
+                document.body.style.overflow = isExpanded ? '' : 'hidden';
+            }
+
+            navToggle.addEventListener('click', toggleMenu);
+            
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('is-open')) toggleMenu();
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
+                    toggleMenu();
+                }
+            });
+
+            // --- Scroll Reveal ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.12
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // --- Modals ---
+            const modals = {
+                contact: document.getElementById('modal-contact'),
+                legal: document.getElementById('modal-legal')
+            };
+
+            function openModal(modalId) {
+                const modal = modals[modalId];
+                if (!modal) return;
+                modal.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModals() {
+                Object.values(modals).forEach(modal => modal.classList.remove('is-active'));
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('.trigger-contact').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal('contact');
+                });
+            });
+
+            document.querySelectorAll('.trigger-legal').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal('legal');
+                });
+            });
+
+            document.querySelectorAll('[data-close-modal]').forEach(btn => {
+                btn.addEventListener('click', closeModals);
+            });
+
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) closeModals();
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModals();
+            });
+
+            // --- Cookie Banner ---
+            const cookieBanner = document.getElementById('cookie-banner');
+            const btnAccept = document.getElementById('cookie-accept');
+            const btnDecline = document.getElementById('cookie-decline');
+
+            if (!localStorage.getItem('cookie_consent')) {
+                setTimeout(() => {
+                    cookieBanner.classList.add('is-visible');
+                }, 1000);
+            }
+
+            function handleCookieChoice(choice) {
+                localStorage.setItem('cookie_consent', choice);
+                cookieBanner.classList.remove('is-visible');
+            }
+
+            btnAccept.addEventListener('click', () => handleCookieChoice('accepted'));
+            btnDecline.addEventListener('click', () => handleCookieChoice('declined'));
+        });
+    </script>
+</body>
+</html>
